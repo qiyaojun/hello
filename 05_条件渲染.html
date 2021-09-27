@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="root">
+        <p v-if="ok">成功了</p>
+        <p v-else>失败</p>
+
+        <p v-show="ok">SUCCESS</p>
+        <p v-show="!ok">FAIL</p>
+
+        <button @click="ok=!ok">点击</button>
+    </div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script type="text/javascript">
+    const vm = new Vue(
+        {
+            el:"#root",
+            data:function ()
+            {
+                return {
+                    name : 'name',
+                    ok: false,
+                }
+            },
+        });
+</script>
+</body>
+</html>

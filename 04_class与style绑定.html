@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .aClass{
+            color: red;
+        }
+
+        .bClass{
+            color: blue;
+        }
+
+        .cClass{
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="root">
+    <h2>class绑定</h2>
+    <p class="cClass" :class="a">字体class绑定</p>
+    <p :class="{aClass:isA,bClass:isB,cClass:true,}">字体class绑定</p>
+
+    <h2>style绑定</h2>
+    <p :style="{color:color}">字体style绑定</p>
+
+
+    <button @click="update()">更新</button>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script type="text/javascript">
+    Vue.config.productionTip=false;
+    const vm = new Vue(
+    {
+        el:"#root",
+        data:function ()
+        {
+            return {
+                name : 'name',
+                a:'aClass',
+                isA:true,
+                isB:false,
+                color:'yellow',
+            }
+        },
+        methods:{
+            update(){
+                // this.a = 'bClass';
+                this.isA = false;
+                this.isB = true;
+                this.color = 'green';
+            },
+        }
+    });
+</script>
+</body>
+</html>

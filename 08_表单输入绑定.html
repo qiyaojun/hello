@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="root">
+    <form action="/x" @submit.prevent="x_show()">
+        <span>用户名</span>
+        <input type="text" v-model="username"><br>
+
+        <span>密码</span>
+        <input type="password" v-model="password"><br>
+
+        <span>性别</span>
+        <input type="radio" id="nan" value="男" v-model="sex">
+        <label for="nan">男</label>
+        <input type="radio" id="nv" value="女" v-model="sex">
+        <label for="nv">女</label><br>
+
+        <span>爱好</span>
+        <input type="checkbox" id="a" value="篮球" v-model="aihao">
+        <label for="a">篮球</label>
+        <input type="checkbox" id="b" value="足球" v-model="aihao">
+        <label for="b">足球</label>
+        <input type="checkbox" id="c" value="羽毛球" v-model="aihao">
+        <label for="c">羽毛球</label><br>
+
+        <span>城市</span>
+        <select name="aa" id="bb" v-model="cityId">
+            <option value="">请选择</option>
+            <option :value="item.id" v-for="item in allCity">{{item.name}}</option>
+        </select>
+
+        <input type="submit" value="提交">
+    </form>
+</div>
+
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script type="text/javascript">
+    Vue.config.productionTip=false;
+    const vm = new Vue(
+    {
+        el:"#root",
+        data:function ()
+        {
+            return {
+                username : '',
+                password : '',
+                sex:'男',
+                aihao:['羽毛球'],
+                allCity:[{id:1,name:'上海'},{id:2,name:'北京'},{id:3,name:'曹县'}],
+                cityId:'',
+            }
+        },
+        methods:{
+            x_show(){
+                alert(this.username+" "+this.password);
+            }
+        }
+    });
+</script>
+</body>
+</html>

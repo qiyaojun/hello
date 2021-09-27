@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="root">
+    <h2>搜索排序</h2>
+    <input type="text" v-model="searchName">
+    <ul>
+        <li v-for="(person,index) in filterPerson" :key="index">
+            {{index}}--姓名：{{person.name}} 年龄：{{person.age}}
+        </li>
+    </ul>
+
+    <button @click="setOrderBy(1)">年龄升序</button>
+    <button @click="setOrderBy(2)">年龄降序</button>
+    <button @click="setOrderBy(0)">原本顺序</button>
+
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script type="text/javascript">
+    //vue本身只是监视了 persons的改变,没有监视数组内部数据的改变
+    //vue重写了数组中的一系列改变数组内部数据的方法（先调用原生方法，之后更新界面）
+    Vue.config.productionTip=false;
+    const vm = new Vue(
+    {
+        el:"#root",
+        data:function ()
+        {
+            return {
+                searchName : '',
+                persons : [
+                    {name:'Tom',age:18},
+                    {name:'jock',age:12},
+                    {name:'nick',age:15},
+                    {name:'张三',age:111},
+                ],
+                orderBy:0,
+            }
+        },
+        computed:{
+            filterPerson(){
+                const {persons , searchName , orderBy} = this;
+                let value_ = persons.filter(persons => persons.name.indexOf(searchName) !== -1);
+
+                if(orderBy!='0')
+                {
+                    value_.sort(function (p1,p2) {
+                        if(orderBy == 2){
+                            return p2.age - p1.age;
+                        }else{
+                            return p1.age - p2.age;
+                        }
+                    })
+                }
+
+
+                return value_;
+            }
+        },
+        methods:{
+            setOrderBy(orderBy){
+                this.orderBy = orderBy;
+            }
+        }
+    });
+</script>
+</body>
+</html>
