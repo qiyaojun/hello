@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="root">
+    <p v-upper-text="msg1"></p>
+    <p v-lower-text="msg1"></p>
+</div>
+
+<div id="root1">
+    <p v-upper-text="msg2"></p>
+    <p v-lower-text="msg2"></p>
+</div>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script type="text/javascript">
+    Vue.config.productionTip=false;
+    Vue.directive('upper-text',function(el,binding){
+        console.log(el);
+        console.log(binding);
+        el.textContent = binding.value.toUpperCase();
+    });
+    const vm = new Vue(
+    {
+        el:"#root",
+        data:function ()
+        {
+            return {
+                msg1 : 'NBA I Love This Game!',
+            }
+        },
+        methods:
+        {
+            default_(){
+
+            },
+        },
+        directives:{  //当前vm管理范围内有效
+            'lower-text' : function(el,binding){
+                console.log(el);
+                console.log(binding);
+                el.textContent = binding.value.toLowerCase();
+            }
+        },
+    });
+
+    const vm1 = new Vue(
+        {
+            el:"#root1",
+            data:function ()
+            {
+                return {
+                    msg2 : 'Just Do It!',
+                }
+            },
+            methods:
+            {
+                default_(){
+
+                },
+            },
+            directives:{
+                'lower-text' : function(el,binding){
+                    console.log(el);
+                    console.log(binding);
+                    el.textContent = binding.value.toLowerCase();
+                }
+            },
+        });
+</script>
+</body>
+</html>

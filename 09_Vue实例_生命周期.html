@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<style>
+    .aClass{
+        color:red;
+        font-size: 18px;
+    }
+</style>
+</head>
+<body>
+<div id="root">
+    <button @click="destroyVM()">destroy vm</button>
+    <p v-show="isShow" :class="{aClass:true,}">显示文本aaaaaaa</p>
+</div>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script type="text/javascript">
+    Vue.config.productionTip=false;
+    const vm = new Vue(
+    {
+        el:"#root",
+        data:function ()
+        {
+            return {
+                isShow : true,
+            }
+        },
+        beforeCreate(){
+            alert("初始化之前")
+        },
+        created(){
+            alert("初始化");
+        },
+        beforeMounted(){//初始化显示之前
+            alert("初始化显示之前");
+        },
+        mounted() {//初始化显示之后立即调用
+            this.intervalId = setInterval(() =>{
+                console.log("===========");
+                this.isShow = !this.isShow;
+            },1000)
+        },
+        beforeUpdate(){ //DOM
+            // alert("修改之前");
+        },
+        updated(){
+            // alert("修改元素");
+        },
+        beforeDestroy(){  //销毁执行之前 执行清除定时器功能
+          clearInterval(this.intervalId)
+        },
+        destroy(){
+            alert("销毁");
+        },
+        methods:{
+            destroyVM(){
+                this.$destroy() //销毁方法
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

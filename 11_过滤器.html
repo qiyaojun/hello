@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<div id="root">
+    <h2>显示格式化的日期</h2>
+    <p>{{date}}</p>
+    <p>完整版：{{date | dateString()}}</p>
+    <p>年月日：{{date | dateString('YYYY-MM-DD')}}</p>
+    <p>时分秒：{{date | dateString('HH:mm:ss')}}</p>
+</div>
+
+<script type="text/javascript" src="https://cdn.bootcss.com/moment.js/2.21.0/moment.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+<script type="text/javascript">
+    Vue.config.productionTip=false;
+    Vue.filter('dateString',(value,format = 'YYYY-MM-DD HH:mm:ss')=>{ //形参默认值
+        return moment(value).format(format || 'YYYY-MM-DD HH:mm:ss');
+    });
+    const vm = new Vue(
+    {
+        el:"#root",
+        data:function ()
+        {
+            return {
+                date : new Date(),
+            }
+        },
+    });
+</script>
+</body>
+</html>
